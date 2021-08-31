@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div>
-		<h1>Mettere hub con luogo e date disponibili</h1>
+		<h1>Mettere hub con luogo e date disponibili!</h1>
 	</div>
 </body>
 </html>
