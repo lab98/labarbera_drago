@@ -47,16 +47,16 @@ public class Prenotazione_Servlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UtenteBean utente= new UtenteBean();
 		utente.setCod_fiscale(request.getParameter("cod_fiscale"));
-		utente.setCod_fiscale(request.getParameter("num_tessera"));
-		utente.setCod_fiscale(request.getParameter("nome"));
-		utente.setCod_fiscale(request.getParameter("cognome"));
-		utente.setCod_fiscale(request.getParameter("sesso"));
-		utente.setCod_fiscale(request.getParameter("data_nascita"));
-		utente.setCod_fiscale(request.getParameter("residenza"));
-		utente.setCod_fiscale(request.getParameter("cittadinanza"));
-		utente.setCod_fiscale(request.getParameter("email"));
-		utente.setCod_fiscale(request.getParameter("telefono"));
-		utente.setCod_fiscale(request.getParameter("cellulare"));
+		utente.setNum_tessera(request.getParameter("num_tessera"));
+		utente.setNome(request.getParameter("nome"));
+		utente.setCognome(request.getParameter("cognome"));
+		utente.setSesso(request.getParameter("sesso"));
+		//utente.setData_nascita(request.getParameter("data_nascita"));
+		utente.setResidenza(request.getParameter("residenza"));
+		utente.setCittadinanza(request.getParameter("cittadinanza"));
+		utente.setCittadinanza(request.getParameter("email"));
+		utente.setTelefono(request.getParameter("telefono"));
+		utente.setCellulare(request.getParameter("cellulare"));
 		try {
 			if(query.prenotazione_dati_utente(utente)==0) {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_utente/prenotazione_errore.jsp");
