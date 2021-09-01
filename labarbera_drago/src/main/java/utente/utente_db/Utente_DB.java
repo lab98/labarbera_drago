@@ -27,7 +27,7 @@ public class Utente_DB {
 		statement.setString(11, utente.getCellulare());
 		risultato_query_prenotazione_dati_utente=statement.executeUpdate();
 		statement.close();
-		cn.getConnection().close();
+		//cn.getConnection().close();
 		return risultato_query_prenotazione_dati_utente;
 	}
 }

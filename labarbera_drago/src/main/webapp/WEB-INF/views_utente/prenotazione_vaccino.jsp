@@ -58,12 +58,12 @@
     		<label for="text">Sesso:</label>
     		<div class="form-check-inline">
       		 <label class="form-check-label" for="radio1">
-        		<input type="radio" class="form-check-input" id="sesso" name="optradio" value="Maschio" checked>Maschio
+        		<input type="radio" class="form-check-input" id="sesso" name="sesso" value="Maschio" checked>Maschio
       		 </label>
     		</div>
     		<div class="form-check-inline">
       		 <label class="form-check-label" for="radio2">
-        		<input type="radio" class="form-check-input" id="sesso" name="optradio" value="Femmina">Femmina
+        		<input type="radio" class="form-check-input" id="sesso" name="sesso" value="Femmina">Femmina
       		 </label>
     		</div>
     		<div class="form-group">
