@@ -3,6 +3,7 @@ package utente.utente_servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -68,6 +69,9 @@ public class Prenotazione_Servlet extends HttpServlet {
 			}
 			
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

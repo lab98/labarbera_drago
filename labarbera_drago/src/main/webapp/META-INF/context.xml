@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context path="/labarbera_drago">
+<Resource auth= "Container "
+driverClassName= "com.mysql.cj.jdbc.Driver"
+factory="org.apache.tomcat.jdbc.pool.DataSourceFactory "
+maxActive="10"
+minIdle="2"
+maxIdle="6"
+maxWait="1000"
+name="jdbc/labarbera_drago"
+username="root"
+password="root" 
+type="javax.sql.DataSource"
+url="jdbc:mysql://localhost:3306/labarbera_drago?uselegacyDatetimeCode=false&amp;serverTimezone=Europe/Rome"
+testOnBorrow="true"
+validationQuery="SELECT 1"/>
+</Context>
+
+
+<!-- la password per il tuo db è ciaociao@99-->

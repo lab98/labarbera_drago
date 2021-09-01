@@ -1,10 +1,50 @@
 package db;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+//import java.sql.DriverManager;
+
+
+
 public class Connessione_DB {
+	private Context ctx= null;
+	private DataSource ds=null;
+	private Connection connection=null;
+	private PreparedStatement ps=null;
+	private ResultSet rs=null;
+	
+	public Connection startConnection() throws NamingException, SQLException {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		}catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		ctx= new InitialContext();
+		ds=(DataSource) this.ctx.lookup("java:comp/env/jdbc/labarbera_drago");
+		return connection = this.ds.getConnection();
+	}
+	
+	public void closeConnection() throws SQLException{
+		if(rs!=null)
+			this.rs.close();
+		
+		ps.close();
+		connection.close();
+	}
+}
+
+/* QUESTO è QUELLO CON IL DRIVEMANAGER
+ * 
+ * 
+ * public class Connessione_DB {
 	private static Connessione_DB connessione_db = null;
 	private String URL="jdbc:mysql://localhost:3306/labarbera_drago?useLegacyDatetimeCode=false&serverTimezone=Europe/Rome";
 	private Connection connection = null;
@@ -43,4 +83,6 @@ public class Connessione_DB {
 	
 	
 }
+
+ */
 
