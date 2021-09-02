@@ -10,11 +10,11 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-//import java.sql.DriverManager;
+import java.sql.DriverManager;
 
 
 
-public class Connessione_DB {
+/*public class Connessione_DB {
 	private Context ctx= null;
 	private DataSource ds=null;
 	private Connection connection=null;
@@ -41,10 +41,10 @@ public class Connessione_DB {
 	}
 }
 
-/* QUESTO è QUELLO CON IL DRIVEMANAGER
+*//* QUESTO è QUELLO CON IL DRIVEMANAGER
  * 
  * 
- * public class Connessione_DB {
+ */ public class Connessione_DB {
 	private static Connessione_DB connessione_db = null;
 	private String URL="jdbc:mysql://localhost:3306/labarbera_drago?useLegacyDatetimeCode=false&serverTimezone=Europe/Rome";
 	private Connection connection = null;
@@ -84,5 +84,5 @@ public class Connessione_DB {
 	
 }
 
- */
+ 
 

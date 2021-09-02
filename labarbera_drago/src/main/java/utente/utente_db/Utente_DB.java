@@ -8,17 +8,17 @@ import db.Connessione_DB;
 import utente.utente_model.UtenteBean;
 
 public class Utente_DB {
-	private Connessione_DB cn = new Connessione_DB();
-	//private Connesione_DB cn= Connesione_DB.getConnessione_DB(); CON DRIVEMANAGER
+	//private Connessione_DB cn = new Connessione_DB();
+	private Connessione_DB cn= Connessione_DB.getConnessione_DB(); 
 	private String query_prenotazione_dati_utente = "INSERT "
 			+ "    INTO utente (cod_fiscale,num_tessera,nome,cognome,sesso,data_nascita,residenza,cittadinanza,email,telefono,cellulare)"
 			+ "    VALUES (?,?,?,?,?,?,?,?,?,?,?);";
 	public int risultato_query_prenotazione_dati_utente;
 	
 	public int prenotazione_dati_utente(UtenteBean utente) throws SQLException, NamingException {
-		/*PreparedStatement statement = cn.getConnection().prepareStatement(query_prenotazione_dati_utente);
-			CON DRIVEMANAGER*/
-		PreparedStatement statement = cn.startConnection().prepareStatement(query_prenotazione_dati_utente);
+		PreparedStatement statement = cn.getConnection().prepareStatement(query_prenotazione_dati_utente);
+			
+		//PreparedStatement statement = cn.startConnection().prepareStatement(query_prenotazione_dati_utente);
 		statement.setString(1, utente.getCod_fiscale());
 		statement.setString(2, utente.getNum_tessera());
 		statement.setString(3, utente.getNome());
