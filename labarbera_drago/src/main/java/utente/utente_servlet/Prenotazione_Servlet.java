@@ -2,6 +2,9 @@ package utente.utente_servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -52,7 +55,14 @@ public class Prenotazione_Servlet extends HttpServlet {
 		utente.setNome(request.getParameter("nome"));
 		utente.setCognome(request.getParameter("cognome"));
 		utente.setSesso(request.getParameter("sesso"));
-		//utente.setData_nascita(request.getParameter("data_nascita"));
+		try {
+			Date data =  new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("data_nascita"));
+			utente.setData_nascita(data);
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}  
+		
 		utente.setResidenza(request.getParameter("residenza"));
 		utente.setCittadinanza(request.getParameter("cittadinanza"));
 		utente.setCittadinanza(request.getParameter("email"));

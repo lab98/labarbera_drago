@@ -24,7 +24,8 @@ public class Utente_DB {
 		statement.setString(3, utente.getNome());
 		statement.setString(4, utente.getCognome());
 		statement.setString(5, utente.getSesso());
-		statement.setDate(6, utente.getData_nascita());
+		long secs= utente.getData_nascita().getTime();
+		statement.setDate(6, new java.sql.Date(secs));
 		statement.setString(7, utente.getResidenza());
 		statement.setString(8, utente.getCittadinanza());
 		statement.setString(9, utente.getEmail());

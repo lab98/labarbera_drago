@@ -2,7 +2,9 @@ package utente.utente_model;
 
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
+
+
 
 public class UtenteBean implements Serializable  {
 	
@@ -41,9 +43,7 @@ public class UtenteBean implements Serializable  {
 	public Date getData_nascita() {
 		return data_nascita;
 	}
-	public void setData_nascita(Date data_nascita) {
-		this.data_nascita = data_nascita;
-	}
+	
 	public String getResidenza() {
 		return residenza;
 	}
@@ -86,5 +86,9 @@ public class UtenteBean implements Serializable  {
 	public void setSesso(String sesso) {
 		this.sesso = sesso;
 	}
+	public void setData_nascita(Date date) {
+		this.data_nascita= date;
+	}
+	
 	
 }
