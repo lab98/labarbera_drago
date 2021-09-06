@@ -10,6 +10,7 @@ public class MedicoDB {
 	private Connessione_DB cn= Connessione_DB.getConnessione_DB();
 	private String query_login= "SELECT password FROM operatore WHERE cod_operatore=?";
 	private String confirmed_login= "SELECT nome, cognome, cod_asp, email, ruolo FROM operatore WHERE cod_operatore=?";
+	private String modifica_password="UPDATE operatore SET password=? WHERE cod_operatore=?";
 	
 	public String login(MedicoBean medico) throws SQLException {
 		String password= new String();
@@ -44,5 +45,17 @@ public class MedicoDB {
 		ps.close();
 	}
 	
+	public void modifica_password(MedicoBean medico, String newpsw) throws SQLException {
+		PreparedStatement ps= cn.getConnection().prepareStatement(modifica_password);
+		ps.setString(1, newpsw);
+		ps.setString(2, medico.getCod_operatore());
+		
+		ps.executeUpdate();
+		
+		ps.close();
+		
+		
+		
+	}
 
 }
