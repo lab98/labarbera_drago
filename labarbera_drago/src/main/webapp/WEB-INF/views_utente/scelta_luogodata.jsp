@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.List"%>
+<%@ page import="java.sql.ResultSet" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,17 +13,22 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script type="text/javascript">
   	$(document).ready(function(){
-  		//funzione get per chiedere la città degli hub
-  	})
+  		$.get("/labarbera_drago/scelta_luogo",function(data, status){
+  			//List<List<String>> result = ((ResultSet) request.getAttribute("hub")).getResult();
+  		});
+  	});
   </script>
 <title>SCELTA LUOGO e DATA</title>
 </head>
 <body>
 	<div id="scelta" class="container">
   		<h2>Sezione 2: <b><i>LUOGO, DATA e ORA</i></b></h2>
+  		<p> <% request.getAttribute("hub"); %>
     	<div class="form-group">
+    	
       		<label for="sel1">Seleziona la Città:</label>
       		<select class="form-control" id="sel1" name="sellist1">
+      		
         		<option>1</option>
         		<option>2</option>
        		 	<option>3</option>

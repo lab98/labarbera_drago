@@ -65,7 +65,7 @@ public class Prenotazione_Servlet extends HttpServlet {
 		
 		utente.setResidenza(request.getParameter("residenza"));
 		utente.setCittadinanza(request.getParameter("cittadinanza"));
-		utente.setCittadinanza(request.getParameter("email"));
+		utente.setEmail(request.getParameter("email"));
 		utente.setTelefono(request.getParameter("telefono"));
 		utente.setCellulare(request.getParameter("cellulare"));
 		try {
