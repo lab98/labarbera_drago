@@ -11,6 +11,7 @@ public class MedicoBean {
 	private String email;
 	private String ruolo;
 	private String password;
+	private String cod_fiscale;
 	
 	
 	public String getCod_operatore() {
@@ -55,6 +56,12 @@ public class MedicoBean {
 	}
 	public void setPassword(String password) {
 		this.password=password;
+	}
+	public String getCod_fiscale() {
+		return cod_fiscale;
+	}
+	public void setCod_fiscale(String cod_fiscale) {
+		this.cod_fiscale = cod_fiscale;
 	}
 
 

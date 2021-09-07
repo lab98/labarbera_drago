@@ -51,7 +51,7 @@ public class LoginMedicoServlet extends HttpServlet {
 		try {
 			String psw=query.login(medico);
 			if(psw.equals(medico.getPassword())) {
-				query.confirm_login(medico);
+				query.confirmLogin(medico);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_medico/pagina_personale.jsp");
 				dispatcher.forward(request, response);
 			}

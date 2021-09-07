@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context path="/labarbera_drago">
+<Resource
+    name="mail/MailSession"
+    auth="Container"
+    type="javax.mail.Session"
+    mail.smtp.host="smtp.gmail.com"
+    mail.smtp.port="587"
+    mail.smtp.auth="true"
+    mail.smtp.starttls.enable="true"
+    mail.smtp.user="user@gmail.com"
+    password="password"
+/>
+</Context>
+
+

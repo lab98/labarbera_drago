@@ -52,7 +52,7 @@ public class ModificaPasswordServlet extends HttpServlet {
 			String oldpsw=query.login(medico);
 			
 			if( oldpsw.equals(request.getParameter("oldpsw"))){
-				query.modifica_password(medico, request.getParameter("newpsw"));
+				query.modificaPassword(medico, request.getParameter("newpsw"));
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_medico/pagina_personale.jsp");
 				dispatcher.forward(request, response);
 				}

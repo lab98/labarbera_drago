@@ -9,8 +9,9 @@ public class MedicoDB {
 	
 	private Connessione_DB cn= Connessione_DB.getConnessione_DB();
 	private String query_login= "SELECT password FROM operatore WHERE cod_operatore=?";
-	private String confirmed_login= "SELECT nome, cognome, cod_asp, email, ruolo FROM operatore WHERE cod_operatore=?";
+	private String confirmed_login= "SELECT nome, cognome, cod_asp, email, ruolo, cod_fiscale FROM operatore WHERE cod_operatore=?";
 	private String modifica_password="UPDATE operatore SET password=? WHERE cod_operatore=?";
+	private String get_email="SELECT cod_operatore, email FROM operatore WHERE cod_fiscale=?";
 	
 	public String login(MedicoBean medico) throws SQLException {
 		String password= new String();
@@ -28,7 +29,7 @@ public class MedicoDB {
 		return password;
 	}
 	
-	public void confirm_login(MedicoBean medico)throws SQLException{
+	public void confirmLogin(MedicoBean medico)throws SQLException{
 		PreparedStatement ps=cn.getConnection().prepareStatement(confirmed_login);
 		ps.setString(1,medico.getCod_operatore());
 		
@@ -41,21 +42,34 @@ public class MedicoDB {
 			medico.setCod_asp(rs.getString(3));
 			medico.setEmail(rs.getString(4));
 			medico.setRuolo(rs.getNString(5));
+			medico.setCod_fiscale(rs.getString(6));
 		}
 		ps.close();
 	}
 	
-	public void modifica_password(MedicoBean medico, String newpsw) throws SQLException {
+	public void modificaPassword(MedicoBean medico, String newpsw) throws SQLException {
 		PreparedStatement ps= cn.getConnection().prepareStatement(modifica_password);
 		ps.setString(1, newpsw);
 		ps.setString(2, medico.getCod_operatore());
 		
 		ps.executeUpdate();
 		
-		ps.close();
-		
-		
-		
+		ps.close();		
 	}
+	
+	public void getEmail(MedicoBean medico) throws SQLException {
+		PreparedStatement ps= cn.getConnection().prepareStatement(get_email);
+		ps.setString(1, medico.getCod_fiscale());
+		
+		System.out.println(medico.getCod_fiscale());
+		
+		ResultSet rs= ps.executeQuery();
+		
+		System.out.println(rs.getString(1));
+		System.out.println(rs.getString(2));
 
+		
+		medico.setEmail(rs.getString(2));
+		medico.setCod_operatore(rs.getString(1));		
+	}
 }

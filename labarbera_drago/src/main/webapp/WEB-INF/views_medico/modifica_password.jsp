@@ -26,7 +26,7 @@
  	<div id="campi" class="container">
   		
   		<form action="/labarbera_drago/ModificaPassword" method="post" class="was-validated"
-  		oninput='confpsw.setCustomValidity(confpsw.value != newpsw.value ? "Passwords do not match." : "")'>
+  		oninput= 'confpsw.setCustomValidity(confpsw.value != newpsw.value ? "Passwords do not match." : "")'>
     		<div class="form-group">
      		 <label for="text">Vecchia Password:</label>
       			<input type="password" class="form-control" id="oldpsw"  name=oldpsw  required>
