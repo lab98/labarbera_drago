@@ -1,6 +1,7 @@
 package utente.utente_servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Json_converter.ResultSetConverter;
 import utente.utente_db.Utente_DB;
 
 /**
@@ -34,17 +36,22 @@ public class Scelta_luogo_data_Servlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ResultSet risultato;
+		
 		try {
-			risultato = query.cerca_hub();
-			request.setAttribute("hub", risultato);
+			response.setContentType("application/json");
+			PrintWriter out = response.getWriter();
+			query.cerca_hub();
+			out.print(ResultSetConverter.convert(query.cerca_hub()));
+			out.flush();
+			out.close();
+			
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_utente/scelta_luogodata.jsp");
-		dispatcher.forward(request, response);
+		
 		
 	}
 

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="java.util.List"%>
-<%@ page import="java.sql.ResultSet" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +13,8 @@
   <script type="text/javascript">
   	$(document).ready(function(){
   		$.get("/labarbera_drago/scelta_luogo",function(data, status){
-  			//List<List<String>> result = ((ResultSet) request.getAttribute("hub")).getResult();
+  			var json = JSON.stringify(data);
+  			alert(json);
   		});
   	});
   </script>
@@ -23,7 +23,6 @@
 <body>
 	<div id="scelta" class="container">
   		<h2>Sezione 2: <b><i>LUOGO, DATA e ORA</i></b></h2>
-  		<p> <% request.getAttribute("hub"); %>
     	<div class="form-group">
     	
       		<label for="sel1">Seleziona la Città:</label>
