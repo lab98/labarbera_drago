@@ -11,7 +11,7 @@ import utente.utente_model.UtenteBean;
 public class Utente_DB {
 	//private Connessione_DB cn = new Connessione_DB();
 	private Connessione_DB cn= Connessione_DB.getConnessione_DB(); 
-	private String query_hub = "SELECT * FROM hub GROUP BY citta ";
+	private String query_hub = "SELECT * FROM hub";
 	private String query_prenotazione_dati_utente = "INSERT "
 			+ "    INTO utente (cod_fiscale,num_tessera,nome,cognome,sesso,data_nascita,residenza,cittadinanza,email,telefono,cellulare)"
 			+ "    VALUES (?,?,?,?,?,?,?,?,?,?,?);";
@@ -19,9 +19,11 @@ public class Utente_DB {
 	private ResultSet risultato_query_hub;
 	
 	public ResultSet cerca_hub() throws SQLException {
-		PreparedStatement statement = cn.getConnection().prepareStatement(query_hub);
-		risultato_query_hub=statement.executeQuery();
-		statement.close();
+		PreparedStatement statement2 = cn.getConnection().prepareStatement(query_hub);
+		risultato_query_hub=statement2.executeQuery();
+		//risultato_query_hub.close();
+		//statement2.close();
+		//cn.getConnection().close();
 		return risultato_query_hub;
 	}
 	
