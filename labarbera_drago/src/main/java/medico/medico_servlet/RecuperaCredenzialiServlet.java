@@ -55,15 +55,19 @@ public class RecuperaCredenzialiServlet extends HttpServlet {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}	
-	medico.setPassword(RandomStringUtils.random(8));
+	medico.setPassword(RandomStringUtils.randomAlphanumeric(8));
 	try {
 		query.modificaPassword(medico, medico.getPassword());
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
+	
+	System.out.println(medico.getCod_operatore());
+	System.out.println(medico.getPassword());
+	System.out.println(medico.getEmail());
 	String subject="Recupero Credenziali";
-	String content= "Queste sono le tue credenziali \n \n "+"username: "+medico.getCod_asp()+"\n"+"password:"+medico.getPassword();  
+	String content= "Queste sono le tue credenziali \n \n "+"Codice Operatore: "+medico.getCod_operatore()+"\n"+"password:"+medico.getPassword();  
 	
 	try {
 		SendEmail.sendMail(medico.getEmail(), subject, content);

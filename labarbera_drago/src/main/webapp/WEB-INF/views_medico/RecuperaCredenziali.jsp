@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Password Dimenticata</title>
+<title>Recupera Credenziali</title>
 </head>
 <body>
 <div id="campi" class="container">

@@ -65,11 +65,10 @@ public class MedicoDB {
 		
 		ResultSet rs= ps.executeQuery();
 		
-		System.out.println(rs.getString(1));
-		System.out.println(rs.getString(2));
-
-		
+		while (rs.next()) {			
+		medico.setCod_operatore(rs.getString(1));
 		medico.setEmail(rs.getString(2));
-		medico.setCod_operatore(rs.getString(1));		
+		}
+		ps.close();
 	}
 }
