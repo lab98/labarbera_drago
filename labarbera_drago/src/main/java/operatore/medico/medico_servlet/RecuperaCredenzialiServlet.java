@@ -1,4 +1,4 @@
-package medico.medico_servlet;
+package operatore.medico.medico_servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import medico.medico_db.MedicoDB;
-import medico.medico_model.MedicoBean;
+import operatore.medico.medico_db.MedicoDB;
+import operatore.medico.medico_model.MedicoBean;
 import email.SendEmail;
 
 /**
@@ -71,8 +71,12 @@ public class RecuperaCredenzialiServlet extends HttpServlet {
 	
 	try {
 		SendEmail.sendMail(medico.getEmail(), subject, content);
+		RequestDispatcher dispatcher= request.getRequestDispatcher("/WEB-INF/views_medico/login.jsp");
+		dispatcher.forward(request, response);
 	} catch (MessagingException e) {
+		RequestDispatcher dispatcher= request.getRequestDispatcher("/WEB-INF/views_medico/errorpage.jsp");
 		// TODO Auto-generated catch block
+		dispatcher.forward(request, response);
 		e.printStackTrace();
 	}
 	

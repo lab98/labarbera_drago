@@ -56,8 +56,8 @@ import java.sql.DriverManager;
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.connection = DriverManager.getConnection(URL,"root", "ciaociao@99"); 
-		/*this.connection = DriverManager.getConnection(URL,"root", "root"); //luca */
+		/*this.connection = DriverManager.getConnection(URL,"root", "ciaociao@99"); */
+			this.connection = DriverManager.getConnection(URL,"root", "root");
 
 	}
 	

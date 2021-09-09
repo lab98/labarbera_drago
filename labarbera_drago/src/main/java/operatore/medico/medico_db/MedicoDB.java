@@ -1,7 +1,7 @@
-package medico.medico_db;
+package operatore.medico.medico_db;
 
 import db.Connessione_DB;
-import medico.medico_model.MedicoBean;
+import operatore.medico.medico_model.MedicoBean;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

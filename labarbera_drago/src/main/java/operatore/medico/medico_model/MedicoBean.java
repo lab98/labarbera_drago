@@ -1,4 +1,4 @@
-package medico.medico_model;
+package operatore.medico.medico_model;
 
 public class MedicoBean {
 	

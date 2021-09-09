@@ -1,4 +1,4 @@
-package medico.medico_servlet;
+package operatore.medico.medico_servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -11,21 +11,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import medico.medico_db.MedicoDB;
-import medico.medico_model.MedicoBean;
+import operatore.medico.medico_model.MedicoBean;
+import operatore.medico.medico_db.MedicoDB;
 
 /**
- * Servlet implementation class ModificaPasswordServlet
+ * Servlet implementation class MedicoServlet
  */
-@WebServlet("/ModificaPassword")
-public class ModificaPasswordServlet extends HttpServlet {
+@WebServlet("/login")
+public class LoginMedicoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	MedicoDB query= new MedicoDB();
+	private MedicoDB query = new MedicoDB();
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ModificaPasswordServlet() {
+    public LoginMedicoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,7 +36,7 @@ public class ModificaPasswordServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_medico/modifica_password.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_medico/login.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -44,28 +44,31 @@ public class ModificaPasswordServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
 		
-		MedicoBean medico=(MedicoBean) session.getAttribute("MedicoLog");
+		MedicoBean medico= new MedicoBean();
+		medico.setCod_operatore(request.getParameter("cod_operatore"));
+		medico.setPassword(request.getParameter("password"));
 		try {
-			String oldpsw=query.login(medico);
-			
-			if( oldpsw.equals(request.getParameter("oldpsw"))){
-				query.modificaPassword(medico, request.getParameter("newpsw"));
+			String psw=query.login(medico);
+			if(psw.equals(medico.getPassword())) {
+				query.confirmLogin(medico);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_medico/pagina_personale.jsp");
 				dispatcher.forward(request, response);
-				}
+			}
 			else {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_medico/modifica_password.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_medico/errore_login.jsp");
 				dispatcher.forward(request, response);
 			}
-				
-		} catch (SQLException e) {
+		} catch (SQLException | ServletException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		HttpSession session = request.getSession();
+		synchronized(session) {
+			session.setAttribute("MedicoLog", medico);
+		}
 		
 	}
+
 }
