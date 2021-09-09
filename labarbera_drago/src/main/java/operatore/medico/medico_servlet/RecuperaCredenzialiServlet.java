@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import operatore.medico.medico_db.MedicoDB;
-import operatore.medico.medico_model.MedicoBean;
+import operatore.operatore_model.OperatoreBean;
 import email.SendEmail;
 
 /**
@@ -47,7 +47,7 @@ public class RecuperaCredenzialiServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	MedicoBean medico=new MedicoBean();
+		OperatoreBean medico=new OperatoreBean();
 	medico.setCod_fiscale(request.getParameter("cod_fiscale"));
 	try {
 		query.getEmail(medico);

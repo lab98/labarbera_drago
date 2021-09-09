@@ -1,7 +1,7 @@
 package operatore.medico.medico_db;
 
 import db.Connessione_DB;
-import operatore.medico.medico_model.MedicoBean;
+import operatore.operatore_model.OperatoreBean;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +13,7 @@ public class MedicoDB {
 	private String modifica_password="UPDATE operatore SET password=? WHERE cod_operatore=?";
 	private String get_email="SELECT cod_operatore, email FROM operatore WHERE cod_fiscale=?";
 	
-	public String login(MedicoBean medico) throws SQLException {
+	public String login(OperatoreBean medico) throws SQLException {
 		String password= new String();
 		PreparedStatement ps= cn.getConnection().prepareStatement(query_login);
 		ps.setString(1,medico.getCod_operatore());
@@ -29,7 +29,7 @@ public class MedicoDB {
 		return password;
 	}
 	
-	public void confirmLogin(MedicoBean medico)throws SQLException{
+	public void confirmLogin(OperatoreBean medico)throws SQLException{
 		PreparedStatement ps=cn.getConnection().prepareStatement(confirmed_login);
 		ps.setString(1,medico.getCod_operatore());
 		
@@ -47,7 +47,7 @@ public class MedicoDB {
 		ps.close();
 	}
 	
-	public void modificaPassword(MedicoBean medico, String newpsw) throws SQLException {
+	public void modificaPassword(OperatoreBean medico, String newpsw) throws SQLException {
 		PreparedStatement ps= cn.getConnection().prepareStatement(modifica_password);
 		ps.setString(1, newpsw);
 		ps.setString(2, medico.getCod_operatore());
@@ -57,7 +57,7 @@ public class MedicoDB {
 		ps.close();		
 	}
 	
-	public void getEmail(MedicoBean medico) throws SQLException {
+	public void getEmail(OperatoreBean medico) throws SQLException {
 		PreparedStatement ps= cn.getConnection().prepareStatement(get_email);
 		ps.setString(1, medico.getCod_fiscale());
 		

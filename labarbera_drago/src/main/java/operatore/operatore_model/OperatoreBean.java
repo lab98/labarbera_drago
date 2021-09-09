@@ -1,8 +1,8 @@
-package operatore.medico.medico_model;
+package operatore.operatore_model;
 
-public class MedicoBean {
+public class OperatoreBean {
 	
-	public MedicoBean() {}
+	public OperatoreBean() {}
 		
 	private String cod_operatore;
 	private String cod_asp;

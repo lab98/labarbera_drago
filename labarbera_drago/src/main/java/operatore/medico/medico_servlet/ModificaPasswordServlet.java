@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import operatore.medico.medico_db.MedicoDB;
-import operatore.medico.medico_model.MedicoBean;
+import operatore.operatore_model.OperatoreBean;
 
 /**
  * Servlet implementation class ModificaPasswordServlet
@@ -47,7 +47,7 @@ public class ModificaPasswordServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		
-		MedicoBean medico=(MedicoBean) session.getAttribute("MedicoLog");
+		OperatoreBean medico=(OperatoreBean) session.getAttribute("MedicoLog");
 		try {
 			String oldpsw=query.login(medico);
 			

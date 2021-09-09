@@ -1,4 +1,4 @@
-package operatore.medico.medico_servlet;
+package operatore.operatore_servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -11,21 +11,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import operatore.medico.medico_model.MedicoBean;
+import operatore.operatore_model.OperatoreBean;
 import operatore.medico.medico_db.MedicoDB;
 
 /**
  * Servlet implementation class MedicoServlet
  */
 @WebServlet("/login")
-public class LoginMedicoServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MedicoDB query = new MedicoDB();
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginMedicoServlet() {
+    public LoginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,7 +36,7 @@ public class LoginMedicoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_operatore/views_operatore/views_medico/login.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_operatore/views_operatore/login.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -45,15 +45,25 @@ public class LoginMedicoServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		MedicoBean medico= new MedicoBean();
+		OperatoreBean medico= new OperatoreBean();
 		medico.setCod_operatore(request.getParameter("cod_operatore"));
 		medico.setPassword(request.getParameter("password"));
 		try {
 			String psw=query.login(medico);
 			if(psw.equals(medico.getPassword())) {
 				query.confirmLogin(medico);
+				if(medico.getRuolo()=="med") {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_operatore/views_medico/pagina_personale.jsp");
 				dispatcher.forward(request, response);
+				}
+				else if (medico.getRuolo()=="asp") {
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_operatore/views_asp/pagina_personale.jsp");
+					dispatcher.forward(request, response);
+				}
+				else if (medico.getRuolo()=="adm") {
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_operatore/views_adm/pagina_personale.jsp");
+					dispatcher.forward(request, response);
+				}
 			}
 			else {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_operatore/views_medico/errore_login.jsp");
