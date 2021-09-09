@@ -36,7 +36,7 @@ public class ModificaPasswordServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_medico/modifica_password.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_operatore/views_medico/modifica_password.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -53,11 +53,11 @@ public class ModificaPasswordServlet extends HttpServlet {
 			
 			if( oldpsw.equals(request.getParameter("oldpsw"))){
 				query.modificaPassword(medico, request.getParameter("newpsw"));
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_medico/pagina_personale.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_operatore/views_medico/pagina_personale.jsp");
 				dispatcher.forward(request, response);
 				}
 			else {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_medico/modifica_password.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_operatore/views_medico/modifica_password.jsp");
 				dispatcher.forward(request, response);
 			}
 				

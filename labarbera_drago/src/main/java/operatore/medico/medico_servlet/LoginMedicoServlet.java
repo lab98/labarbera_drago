@@ -36,7 +36,7 @@ public class LoginMedicoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_medico/login.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_operatore/views_operatore/views_medico/login.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -52,11 +52,11 @@ public class LoginMedicoServlet extends HttpServlet {
 			String psw=query.login(medico);
 			if(psw.equals(medico.getPassword())) {
 				query.confirmLogin(medico);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_medico/pagina_personale.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_operatore/views_medico/pagina_personale.jsp");
 				dispatcher.forward(request, response);
 			}
 			else {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_medico/errore_login.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_operatore/views_medico/errore_login.jsp");
 				dispatcher.forward(request, response);
 			}
 		} catch (SQLException | ServletException | IOException e) {
