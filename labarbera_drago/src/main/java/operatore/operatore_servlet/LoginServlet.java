@@ -36,7 +36,7 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_operatore/views_operatore/login.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_operatore/login.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -66,7 +66,7 @@ public class LoginServlet extends HttpServlet {
 				}
 			}
 			else {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_operatore/views_medico/errore_login.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_operatore/errore_login.jsp");
 				dispatcher.forward(request, response);
 			}
 		} catch (SQLException | ServletException | IOException e) {
