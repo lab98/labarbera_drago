@@ -14,7 +14,10 @@
   	$(document).ready(function(){
   		$.get("/labarbera_drago/scelta_luogo",function(data, status){
   			var json = JSON.stringify(data);
-  			alert(json);
+  			for(i=0; i<json.lenght();i++){
+  				citta=json.
+  			}
+  			
   		});
   	});
   </script>
@@ -27,6 +30,7 @@
     	
       		<label for="sel1">Seleziona la Città:</label>
       		<select class="form-control" id="sel1" name="sellist1">
+      		
       		
         		<option>1</option>
         		<option>2</option>
