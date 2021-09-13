@@ -16,29 +16,36 @@
   		obj= JSON.parse(x);
   	}
   	$(document).ready(function(){
+  		$("#data").hide();
   		$.get("/labarbera_drago/scelta_luogo",function(data, status){
   			var json = JSON.stringify(data);
   			setObj(json);
   			var citta=null;
   			for(var o in obj){
   				if(citta!=obj[o].citta){
-  					$("#sel1").append($("<option onclick='mySelect()'>"+obj[o].citta+"<option>"));
+  					$("#sel1").append($("<option value="+obj[o].citta+">"+obj[o].citta+"</option>"));
   				}
   				citta=obj[o].citta;
   			}
   		});
   		
   	});
-  	function mySelect(){
-		for(var o in obj){
-			if(o.citta==$("select option:selected").text()){
-				$("#hub").append($("<div class='card bg-primary'><div class='card-body text-center'><p class='card-text'>")).
-				append($("<h3>"+obj[o].nome_hub)+"</h3><br><br><h4>"+obj[o].citta+" , "+obj[o].indirizzo+"</h4>").
-				append($("<br></div></div>"));
+  	
+  	
+  	 function ricercaHub(){
+  		$("#hub").empty();
+  		for(var o in obj){
+			if(obj[o].citta==$("select option:selected").text()){
+				$("#hub").append($("<div class='card bg-primary'><div class='card-body text-center'><p class='card-text'><h3>"+obj[o].nome_hub+"</h3><br><br><h4>"+obj[o].citta+" , "+obj[o].indirizzo+"</h4><br></p><button type='button' class='btn btn-light' onClick='selezionaData()''>Seleziona Hub</button></div></div>"));
 			}
 		}
+  	};
+  	
+  	function selezionaData(){
+  		$("#data").show();
+  	}
 		
-}
+
   	
   </script>
 <title>SCELTA LUOGO e DATA</title>
@@ -49,13 +56,18 @@
     	<div class="form-group">
     	
       		<label for="sel1">Seleziona la Città:</label>
-      		<select class="form-control" id="sel1" name="sellist1">
+      		<select class="form-control" id="sel1" name="sellist1" onClick="ricercaHub()">
       		</select>
-      </div>		
+      	</div>		
       <br>
     <div id="hub" class="card-deck">
-  		
-	</div>
+  	</div>
+  	<br>
+  	<br>
+  	<div id="data">
+  	<p> Seleziona la Data: </p>
+  	<input type="Date" class="form-control" id="data_nascita"  name="data_nascita"  required>
+  	</div>
     
 </body>
 </html>
