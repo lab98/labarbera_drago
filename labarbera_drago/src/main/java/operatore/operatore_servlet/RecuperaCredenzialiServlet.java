@@ -38,7 +38,7 @@ public class RecuperaCredenzialiServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_operatore/views_medico/RecuperaCredenziali.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_operatore/RecuperaCredenziali.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -71,10 +71,10 @@ public class RecuperaCredenzialiServlet extends HttpServlet {
 	
 	try {
 		SendEmail.sendMail(medico.getEmail(), subject, content);
-		RequestDispatcher dispatcher= request.getRequestDispatcher("/WEB-INF/views_operatore/views_medico/login.jsp");
+		RequestDispatcher dispatcher= request.getRequestDispatcher("/WEB-INF/views_operatore/login.jsp");
 		dispatcher.forward(request, response);
 	} catch (MessagingException e) {
-		RequestDispatcher dispatcher= request.getRequestDispatcher("/WEB-INF/views_operatore/views_medico/errorpage.jsp");
+		RequestDispatcher dispatcher= request.getRequestDispatcher("/WEB-INF/views_operatore/errorpage.jsp");
 		// TODO Auto-generated catch block
 		dispatcher.forward(request, response);
 		e.printStackTrace();
