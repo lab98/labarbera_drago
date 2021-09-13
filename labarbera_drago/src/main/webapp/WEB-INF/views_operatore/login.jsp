@@ -34,7 +34,7 @@
     		</div>
     		<div class="form-group">
       		 <label for="text">Password :</label>
-     			 <input type="text" class="form-control" id="password"  name="password" required>
+     			 <input type="password" class="form-control" id="password"  name="password" required>
      			 <div class="valid-feedback">Valido</div>
       			 <div class="invalid-feedback">Immettere un campo valido</div>
     		</div>

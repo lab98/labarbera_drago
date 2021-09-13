@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import operatore.medico.medico_db.MedicoDB;
+import operatore.operatore_db.OperatoreDB;
 import operatore.operatore_model.OperatoreBean;
 import email.SendEmail;
 
@@ -22,7 +22,7 @@ import email.SendEmail;
 @WebServlet("/RecuperaCredenziali")
 public class RecuperaCredenzialiServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	MedicoDB query=new MedicoDB();
+	OperatoreDB query=new OperatoreDB();
        
     /**
      * @see HttpServlet#HttpServlet()

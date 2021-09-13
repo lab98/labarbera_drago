@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import operatore.operatore_model.OperatoreBean;
-import operatore.medico.medico_db.MedicoDB;
+import operatore.operatore_db.OperatoreDB;
 
 /**
  * Servlet implementation class MedicoServlet
@@ -20,7 +20,7 @@ import operatore.medico.medico_db.MedicoDB;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private MedicoDB query = new MedicoDB();
+	private OperatoreDB query = new OperatoreDB();
        
     /**
      * @see HttpServlet#HttpServlet()

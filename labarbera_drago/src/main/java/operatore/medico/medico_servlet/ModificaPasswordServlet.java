@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import operatore.medico.medico_db.MedicoDB;
+import operatore.operatore_db.OperatoreDB;
 import operatore.operatore_model.OperatoreBean;
 
 /**
@@ -20,7 +20,7 @@ import operatore.operatore_model.OperatoreBean;
 @WebServlet("/ModificaPassword")
 public class ModificaPasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	MedicoDB query= new MedicoDB();
+	OperatoreDB query= new OperatoreDB();
        
     /**
      * @see HttpServlet#HttpServlet()
