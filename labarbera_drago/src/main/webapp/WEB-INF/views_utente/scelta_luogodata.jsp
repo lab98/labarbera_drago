@@ -34,11 +34,19 @@
   	
   	 function ricercaHub(){
   		$("#hub").empty();
-  		for(var o in obj){
-			if(obj[o].citta==$("select option:selected").text()){
-				$("#hub").append($("<div class='card bg-primary'><div class='card-body text-center'><p class='card-text'><h3>"+obj[o].nome_hub+"</h3><br><br><h4>"+obj[o].citta+" , "+obj[o].indirizzo+"</h4><br></p><button type='button' class='btn btn-light' onClick='selezionaData()''>Seleziona Hub</button></div></div>"));
+  		$("#hub").append($("<div class='row'>"));
+  		var i=0;
+  			for(var o in obj){
+				if(obj[o].citta==$("select option:selected").text()){
+					i++;
+					$("#hub").append($("<div class='col-4'><div class='card bg-primary'><div class='card-body text-center'><p class='card-text'><h3>"+obj[o].nome_hub+"</h3><br><br><h4>"+obj[o].citta+" , "+obj[o].indirizzo+"</h4><br></p><button type='button' class='btn btn-light' onClick='selezionaData()''>Seleziona Hub</button></div></div></div>"));
+					if(i%3==0){
+						$("#hub").append($("</div><div class='row'>"));
+					}
+				}
+				
 			}
-		}
+  		
   	};
   	
   	function selezionaData(){
@@ -60,7 +68,9 @@
       		</select>
       	</div>		
       <br>
-    <div id="hub" class="card-deck">
+    <div class="card-deck">
+    <div id="hub" class="container">
+    </div>
   	</div>
   	<br>
   	<br>

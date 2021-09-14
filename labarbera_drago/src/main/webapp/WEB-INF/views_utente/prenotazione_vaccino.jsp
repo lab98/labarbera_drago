@@ -55,13 +55,13 @@
     		</div>
     		<div class="form-group">
      		 <label for="text">Nome:</label>
-      			<input type="text" class="form-control" id="nome" placeholder="ESEMPIO: Salvatore" name="nome"  required>
+      			<input type="text" class="form-control" id="nome" placeholder="ESEMPIO: Salvatore" name="nome" pattern="[A-z]{2,}" required>
       			<div class="valid-feedback">Valido</div>
 				<div class="invalid-feedback">Immetere un campo valido</div>
 			</div>
     		<div class="form-group">
      		 <label for="text">Cognome:</label>
-      			<input type="text" class="form-control" id="cognome" placeholder="ESEMPIO: Drago" name="cognome"  required>
+      			<input type="text" class="form-control" id="cognome" placeholder="ESEMPIO: Drago" name="cognome" pattern="[A-z]{2,}" required>
       			<div class="valid-feedback">Valido</div>
       			<div class="invalid-feedback">Immettere un campo valido</div>
     		</div>
@@ -78,19 +78,19 @@
     		</div>
     		<div class="form-group">
      		 <label for="text">Data di nascita:</label>
-      			<input type="Date" class="form-control" id="data_nascita"  name="data_nascita"  required>
+      			<input type="Date" class="form-control" id="data_nascita"  name="data_nascita"  max="2009-12-31" required>
       			<div class="valid-feedback">Valido</div>
       			<div class="invalid-feedback">Immettere un campo valido</div>
     		</div>
     		<div class="form-group">
      		 <label for="text">Cittadinanza:</label>
-      			<input type="text" class="form-control" id="cittadinanza"  name="cittadinanza" placeholder="ESEMPIO: Italiana"  required>
+      			<input type="text" class="form-control" id="cittadinanza"  name="cittadinanza" placeholder="ESEMPIO: Italiana" pattern="[A-z]{2,}" required>
       			<div class="valid-feedback">Valido</div>
       			<div class="invalid-feedback">Immettere un campo valido</div>
     		</div>
     		<div class="form-group">
      		 <label for="text">Residenza:</label>
-      			<input type="text" class="form-control" id="residenza"  name="residenza" placeholder="ESEMPIO: Via Andrea Raia 4" required>
+      			<input type="text" class="form-control" id="residenza"  name="residenza" placeholder="ESEMPIO: Via Andrea Raia 4" pattern="[A-z,0-9,[:space]]{2,}" required>
       			<div class="valid-feedback">Valido</div>
       			<div class="invalid-feedback">Immettere un campo valido</div>
     		</div>
@@ -102,13 +102,13 @@
     		</div>
     		<div class="form-group">
      		 <label for="text">Telefono:</label>
-      			<input type="text" class="form-control" id="telefono"  name="telefono" placeholder="ESEMPIO: +39 0917371281">
+      			<input type="text" class="form-control" id="telefono"  name="telefono" placeholder="ESEMPIO: +39 0917371281" pattern="^((00|\+)39[\. ]??)??3\d{2}[\. ]??\d{6,7}$">
       			<div class="valid-feedback">Valido</div>
       			<div class="invalid-feedback">Immettere un campo valido</div>
     		</div>
     		<div class="form-group">
      		 <label for="text">Cellulare:</label>
-      			<input type="text" class="form-control" id="cellulare"  name="cellulare" placeholder="ESEMPIO: +39 3779510125">
+      			<input type="text" class="form-control" id="cellulare"  name="cellulare" placeholder="ESEMPIO: +39 3779510125" pattern="^((00|\+)39[\. ]??)??3\d{2}[\. ]??\d{6,7}$">
       			<div class="valid-feedback">Valido</div>
       			<div class="invalid-feedback">Immettere un campo valido</div>
     		</div>
