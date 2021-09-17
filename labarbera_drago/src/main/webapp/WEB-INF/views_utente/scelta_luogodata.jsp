@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.util.Date" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +12,9 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script type="text/javascript">
   	var obj;
+  	var k;
+  //	Date date= new SimpleDateFormat("yyyy-MM-dd");
+  	
   	function setObj(x){
   		obj= JSON.parse(x);
   	}
@@ -33,7 +36,9 @@
   	}
   	
   	$(document).ready(function(){
+  		//alert(date);
   		$("#data").hide();
+  		$("#hub_scelto").hide();
   		$.get("/labarbera_drago/scelta_luogo",function(data, status){
   			var json = JSON.stringify(data);
   			setObj(json);
@@ -48,18 +53,20 @@
   	
   	 function ricercaHub(){
   		$("#hub").empty();
-  		
-  		var i=0;
-  			for(var o in obj){
-				if(obj[o].citta==$("select option:selected").text()){
-					$("#hub").append($("<div class='col-4'><div class='card bg-primary' style='margin-top: 10px; width: 220px;height: 300px;line-height: 25px;font-size: 15px;'><div class='card-body text-center'><h3>"+obj[o].nome_hub+"</h3><br><br><h4>"+obj[o].citta+" , "+obj[o].indirizzo+"</h4><br><button type='button' class='btn btn-light' onClick='selezionaData()''>Seleziona Hub</button></div></div></div>"));
+  			for( k in obj){
+				if(obj[k].citta==$("select option:selected").text()){
+					$("#hub").append($("<div class='col-4'><div class='card bg-primary' style='margin-top: 10px; width: 220px;height: 300px;line-height: 25px;font-size: 15px;'><div class='card-body text-center'><h3>"+obj[k].nome_hub+"</h3><br><br><h4>"+obj[k].citta+" , "+obj[k].indirizzo+"</h4><br><button  type='button' class='btn btn-light' onClick='selezionaData("+obj[k]+")'>Seleziona Hub</button></div></div></div>"));
 					}
 				}
 	};
   	
-  	function selezionaData(){
+  	function selezionaData(x){
+  		$("#scelta").hide();
+  		$("#hub").hide();
+  		$("#hub_scelto").append($("<h3>"+x.nome_hub+", "+x.citta+", "+x.indirizzo+"</h3>")).show();
   		$("#data").show();
-  	}
+  		$("#data_nascita").attr("min","2021-09-17");
+  }
 		
 
   	
@@ -67,24 +74,27 @@
 <title>SCELTA LUOGO e DATA</title>
 </head>
 <body>
-	<div id="scelta" class="container">
+	<div class="container">
   		<h2>Sezione 2: <b><i>LUOGO, DATA e ORA</i></b></h2>
-    	<div class="form-group">
-    	
-      		<label for="sel1">Seleziona la Città:</label>
+    	<div id="scelta" class="form-group">
+    		<label for="sel1">Seleziona la Città:</label>
       		<select class="form-control" id="sel1" name="sellist1" onClick="ricercaHub()">
       		</select>
-      	</div>		
+      	</div>	
+     
       <br>
     <div id="hub" class="card-deck">
-    
-  	</div>
+    </div>
+    <div id="hub_scelto">
+    	
+    </div>
   	<br>
   	<br>
   	<div id="data">
   	<p> Seleziona la Data: </p>
-  	<input type="Date" class="form-control" id="data_nascita"  name="data_nascita" max="2021-09-16" min="LocalDate.now()" required>
+  	<input type="Date" class="form-control" id="data_nascita"  name="data_nascita"  required>
   	</div>
+  </div>
     
 </body>
 </html>
