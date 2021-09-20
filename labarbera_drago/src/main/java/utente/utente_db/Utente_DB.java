@@ -15,6 +15,10 @@ public class Utente_DB {
 	private String query_prenotazione_dati_utente = "INSERT "
 			+ "    INTO utente (cod_fiscale,num_tessera,nome,cognome,sesso,data_nascita,residenza,cittadinanza,email,telefono,cellulare)"
 			+ "    VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+	private String query_verifica_cf= "SELECT cod_fiscale FROM utente WHERE cod_fiscale=?";
+	private String query_verifica_nt= "SELECT COUNT(num_tessera) as numero FROM utente WHERE num_tessera=?";
+	private ResultSet risultato_query_verifica_nt;
+	private ResultSet risultato_query_verifica_cf;
 	private int risultato_query_prenotazione_dati_utente;
 	private ResultSet risultato_query_hub;
 	
@@ -44,8 +48,23 @@ public class Utente_DB {
 		statement.setString(10, utente.getTelefono());
 		statement.setString(11, utente.getCellulare());
 		risultato_query_prenotazione_dati_utente=statement.executeUpdate();
-		statement.close();
+		//statement.close();
 		//cn.getConnection().close();
 		return risultato_query_prenotazione_dati_utente;
+	}
+	
+	public ResultSet verifica_cf(String cf) throws SQLException {
+		PreparedStatement statement3 = cn.getConnection().prepareStatement(query_verifica_cf);
+		statement3.setString(1, cf);
+		risultato_query_verifica_cf=statement3.executeQuery();
+		//statement3.close();
+		return risultato_query_verifica_cf;
+	}
+	public ResultSet verifica_nt(String nt) throws SQLException {
+		PreparedStatement statement4 = cn.getConnection().prepareStatement(query_verifica_nt);
+		statement4.setString(1, nt);
+		risultato_query_verifica_nt= statement4.executeQuery();
+		//statement4.close();
+		return risultato_query_verifica_nt;
 	}
 }
