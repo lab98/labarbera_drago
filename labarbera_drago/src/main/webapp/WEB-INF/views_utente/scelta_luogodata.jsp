@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,9 +12,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script type="text/javascript">
-  	var obj;
-  	var k;
-  //	Date date= new SimpleDateFormat("yyyy-MM-dd");
+  var obj;
+  
+  
   	
   	function setObj(x){
   		obj= JSON.parse(x);
@@ -40,8 +41,7 @@
   		$("#data").hide();
   		$("#hub_scelto").hide();
   		$.get("/labarbera_drago/scelta_luogo",function(data, status){
-  			var json = JSON.stringify(data);
-  			setObj(json);
+  			obj=data;
   			var cit=estrai(obj);
   			for(var c in cit){
   					$("#sel1").append($("<option value="+cit[c]+">"+cit[c]+"</option>"));
@@ -53,9 +53,9 @@
   	
   	 function ricercaHub(){
   		$("#hub").empty();
-  			for( k in obj){
+  			for( var k in obj){
 				if(obj[k].citta==$("select option:selected").text()){
-					$("#hub").append($("<div class='col-4'><div class='card bg-primary' style='margin-top: 10px; width: 220px;height: 300px;line-height: 25px;font-size: 15px;'><div class='card-body text-center'><h3>"+obj[k].nome_hub+"</h3><br><br><h4>"+obj[k].citta+" , "+obj[k].indirizzo+"</h4><br><button  type='button' class='btn btn-light' onClick='selezionaData("+obj[k]+")'>Seleziona Hub</button></div></div></div>"));
+					$("#hub").append($("<div class='col-4'><div class='card bg-primary' style='margin-top: 10px; width: 220px;height: 300px;line-height: 25px;font-size: 15px;'><div class='card-body text-center'><h3>"+obj[k].nome_hub+"</h3><br><br><h4>"+obj[k].citta+" , "+obj[k].indirizzo+"</h4><br><button  type='button' class='btn btn-light' onClick='selezionaData("+k+")'>Seleziona Hub</button></div></div></div>"));
 					}
 				}
 	};
@@ -63,12 +63,19 @@
   	function selezionaData(x){
   		$("#scelta").hide();
   		$("#hub").hide();
-  		$("#hub_scelto").append($("<h3>"+x.nome_hub+", "+x.citta+", "+x.indirizzo+"</h3>")).show();
+  		$("#hub_scelto").append($("<h2>HUB SELEZIONATO</h2><h3>"+obj[x].nome_hub+", "+obj[x].citta+", "+obj[x].indirizzo+"</h3>")).show();
   		$("#data").show();
   		$("#data_nascita").attr("min","2021-09-17");
   }
 		
-
+	function sceltaHub(){
+		$("#scelta").show();
+		$("#hub").show();
+		$("#hub_scelto h2").remove();
+		$("#hub_scelto h3").remove();
+		$("#hub_scelto").hide();
+		$("#data").hide();
+	}
   	
   </script>
 <title>SCELTA LUOGO e DATA</title>
@@ -93,6 +100,8 @@
   	<div id="data">
   	<p> Seleziona la Data: </p>
   	<input type="Date" class="form-control" id="data_nascita"  name="data_nascita"  required>
+  	<button class="btn btn-primary" onclick="sceltaHub()">Cambia Hub</button>
+  	<% Date data= new Date(); out.println("<p>"+ data+"</p>"); %>
   	</div>
   </div>
     
