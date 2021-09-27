@@ -48,19 +48,29 @@ public class LoginServlet extends HttpServlet {
 		OperatoreBean medico= new OperatoreBean();
 		medico.setCod_operatore(request.getParameter("cod_operatore"));
 		medico.setPassword(request.getParameter("password"));
+		
+		
 		try {
 			String psw=query.login(medico);
 			if(psw.equals(medico.getPassword())) {
 				query.confirmLogin(medico);
-				if(medico.getRuolo()=="med") {
+				HttpSession session=request.getSession();
+				synchronized(session) {
+					session.setAttribute("OperatoreLog", medico);
+				}
+				
+				if(medico.getRuolo().equals("med")) {
+					
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_operatore/views_medico/pagina_personale.jsp");
 				dispatcher.forward(request, response);
 				}
-				else if (medico.getRuolo()=="asp") {
+				else if (medico.getRuolo().equals("asp")) {
+					
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_operatore/views_asp/pagina_personale.jsp");
 					dispatcher.forward(request, response);
 				}
-				else if (medico.getRuolo()=="adm") {
+				else if (medico.getRuolo().equals("adm")) {
+					
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_operatore/views_adm/pagina_personale.jsp");
 					dispatcher.forward(request, response);
 				}
@@ -74,10 +84,7 @@ public class LoginServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		HttpSession session = request.getSession();
-		synchronized(session) {
-			session.setAttribute("MedicoLog", medico);
-		}
+		
 		
 	}
 

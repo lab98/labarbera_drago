@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class OperatoreDB {
 	private Connessione_DB cn= Connessione_DB.getConnessione_DB();
 	private String query_login= "SELECT password FROM operatore WHERE cod_operatore=?";
-	private String confirmed_login= "SELECT nome, cognome, cod_asp, email, ruolo, cod_fiscale FROM operatore WHERE cod_operatore=?";
+	private String confirmed_login= "SELECT nome, cognome, cod_asp, email, ruolo, cod_fiscale,cod_asp FROM operatore WHERE cod_operatore=?";
 	private String modifica_password="UPDATE operatore SET password=? WHERE cod_operatore=?";
 	private String get_email="SELECT cod_operatore, email FROM operatore WHERE cod_fiscale=?";
 	
@@ -44,6 +44,7 @@ public class OperatoreDB {
 			medico.setEmail(rs.getString(4));
 			medico.setRuolo(rs.getNString(5));
 			medico.setCod_fiscale(rs.getString(6));
+			medico.setCod_asp(rs.getString(7));
 		}
 		ps.close();
 	}

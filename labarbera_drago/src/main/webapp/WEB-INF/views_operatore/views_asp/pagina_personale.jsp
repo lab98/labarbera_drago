@@ -7,6 +7,6 @@
 <title>Personal Page</title>
 </head>
 <body>
-
+<p><% out.print(session.getAttribute("MedicoLog")); %></p>
 </body>
 </html>

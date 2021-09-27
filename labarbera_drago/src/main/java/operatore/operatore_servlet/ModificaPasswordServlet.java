@@ -47,7 +47,9 @@ public class ModificaPasswordServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		
-		OperatoreBean medico=(OperatoreBean) session.getAttribute("MedicoLog");
+		OperatoreBean medico;
+		
+			medico=(OperatoreBean) session.getAttribute("OperatoreLog");
 		try {
 			String oldpsw=query.login(medico);
 			
