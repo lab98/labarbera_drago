@@ -2,6 +2,7 @@ package utente.utente_db;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 import javax.naming.NamingException;
 
@@ -16,7 +17,9 @@ public class Utente_DB {
 			+ "    INTO utente (cod_fiscale,num_tessera,nome,cognome,sesso,data_nascita,residenza,cittadinanza,email,telefono,cellulare)"
 			+ "    VALUES (?,?,?,?,?,?,?,?,?,?,?);";
 	private String query_verifica_cf= "SELECT cod_fiscale FROM utente WHERE cod_fiscale=?";
-	private String query_verifica_nt= "SELECT COUNT(num_tessera) as numero FROM utente WHERE num_tessera=?";
+	private String query_verifica_nt= "SELECT num_tessera FROM utente WHERE num_tessera=?";
+	private String query_verifica_orari=" SELECT ora from prenotazione, hub where prenotazione.cod_hub=hub.cod_hub and data_prenotazione=? and nome_hub=? group by ora having count(*)>2";
+	private ResultSet risultato_query_verifica_orari;
 	private ResultSet risultato_query_verifica_nt;
 	private ResultSet risultato_query_verifica_cf;
 	private int risultato_query_prenotazione_dati_utente;
@@ -66,5 +69,13 @@ public class Utente_DB {
 		risultato_query_verifica_nt= statement4.executeQuery();
 		//statement4.close();
 		return risultato_query_verifica_nt;
+	}
+	public ResultSet verifica_orari(Date data, String nome) throws SQLException {
+		PreparedStatement statement= cn.getConnection().prepareStatement(query_verifica_orari);
+		long secs= data.getTime();
+		statement.setDate(1, new java.sql.Date(secs));
+		statement.setString(2, nome);
+		risultato_query_verifica_orari=statement.executeQuery();
+		return risultato_query_verifica_orari;
 	}
 }

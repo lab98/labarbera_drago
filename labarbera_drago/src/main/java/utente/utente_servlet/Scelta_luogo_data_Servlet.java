@@ -2,10 +2,8 @@ package utente.utente_servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +20,7 @@ import utente.utente_db.Utente_DB;
 public class Scelta_luogo_data_Servlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-	Utente_DB query= new Utente_DB();
+	private Utente_DB query= new Utente_DB();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -60,7 +58,7 @@ public class Scelta_luogo_data_Servlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		
 	}
 
 }

@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,13 +13,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script type="text/javascript">
-  var obj;
-  
-  
-  	
-  	function setObj(x){
-  		obj= JSON.parse(x);
-  	}
+  	var obj;
   	function estrai(x){
   		var f=0;
   		var citta=[x[0].citta];
@@ -40,6 +35,7 @@
   		//alert(date);
   		$("#data").hide();
   		$("#hub_scelto").hide();
+  		$("#orari_disponibili").hide();
   		$.get("/labarbera_drago/scelta_luogo",function(data, status){
   			obj=data;
   			var cit=estrai(obj);
@@ -63,7 +59,7 @@
   	function selezionaData(x){
   		$("#scelta").hide();
   		$("#hub").hide();
-  		$("#hub_scelto").append($("<h2>HUB SELEZIONATO</h2><h3>"+obj[x].nome_hub+", "+obj[x].citta+", "+obj[x].indirizzo+"</h3>")).show();
+  		$("#hub_scelto").append($("<h2>HUB SELEZIONATO</h2><h3 id='nome_hub'>"+obj[x].nome_hub+"</h3><h3>"+obj[x].citta+", "+obj[x].indirizzo+"</h3>")).show();
   		$("#data").show();
   		$("#data_nascita").attr("min","2021-09-17");
   }
@@ -75,8 +71,27 @@
 		$("#hub_scelto h3").remove();
 		$("#hub_scelto").hide();
 		$("#data").hide();
+		$("#orari_disponibili").hide();
 	}
   	
+	function orari(){
+		$.post("/labarbera_drago/scelta_ora", 
+				{
+					data_scelta: $("#data_scelta").val(),
+					nome_hub: $("#nome_hub").text()
+				},
+				function(data, status){
+					$("#orari_disponibili").show();
+					for(var i in data){
+						alert(data[i].ora);
+						$("#orari_disponibili").children("p").each(function(){
+							if($(this).text()==data[i].ora){
+								$(this).hide();
+							}
+						});
+					}
+					});
+	}
   </script>
 <title>SCELTA LUOGO e DATA</title>
 </head>
@@ -99,9 +114,22 @@
   	<br>
   	<div id="data">
   	<p> Seleziona la Data: </p>
-  	<input type="Date" class="form-control" id="data_nascita"  name="data_nascita"  required>
+  	<% Date data= new Date();
+  	String mese;
+  	if(data.getMonth()>=9){mese=""+(data.getMonth()+1)+"";}else{mese="0"+(data.getMonth()+1)+"";}
+  	String data_min=""+(data.getYear()+1900)+"-"+mese+"-"+data.getDate()+"";
+  	out.println("<input type='Date' id='data_scelta' class='form-control' min="+data_min+" required>");
+  	%>
   	<button class="btn btn-primary" onclick="sceltaHub()">Cambia Hub</button>
-  	<% Date data= new Date(); out.println("<p>"+ data+"</p>"); %>
+  	<button class="btn btn-primary"  onclick="orari()">Vedi orari disponibili</button>
+  	</div>
+  	<br><br>
+  	<div id="orari_disponibili">
+  		<p>08:00-09:00</p><button>SCEGLI</button>
+  		<p>09:00-10:00</p><button>SCEGLI</button>
+  		<p>10:00-11:00</p><button>SCEGLI</button>
+  		<p>11:00-12:00</p><button>SCEGLI</button>
+  		<p>12:00-13:00</p><button>SCEGLI</button>
   	</div>
   </div>
     

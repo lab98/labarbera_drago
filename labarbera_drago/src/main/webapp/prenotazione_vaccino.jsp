@@ -90,7 +90,7 @@
     		</div>
     		<div class="form-group">
      		 <label for="text">Residenza:</label>
-      			<input type="text" class="form-control" id="residenza"  name="residenza" placeholder="ESEMPIO: Via Andrea Raia 4" pattern="[A-z,0-9,[:space]]{2,}" required>
+      			<input type="text" class="form-control" id="residenza"  name="residenza" placeholder="ESEMPIO: Via Andrea Raia 4"  required>
       			<div class="valid-feedback">Valido</div>
       			<div class="invalid-feedback">Immettere un campo valido</div>
     		</div>

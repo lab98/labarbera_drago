@@ -26,7 +26,7 @@ import utente.utente_model.UtenteBean;
 public class Prenotazione_Servlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-	Utente_DB query= new Utente_DB();
+	private Utente_DB query= new Utente_DB();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -58,8 +58,7 @@ public class Prenotazione_Servlet extends HttpServlet {
 				if(!cf.next()){
 					cf.close();
 					ResultSet nt= query.verifica_nt(request.getParameter("num_tessera"));
-					nt.next();
-						if(nt.getInt("numero")==0) {
+						if(!nt.next()) {
 						nt.close();
 						UtenteBean utente= new UtenteBean();
 						utente.setCod_fiscale(request.getParameter("cod_fiscale"));
