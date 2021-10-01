@@ -59,7 +59,7 @@
   	function selezionaData(x){
   		$("#scelta").hide();
   		$("#hub").hide();
-  		$("#hub_scelto").append($("<h2>HUB SELEZIONATO</h2><h3 id='nome_hub'>"+obj[x].nome_hub+"</h3><h3>"+obj[x].citta+", "+obj[x].indirizzo+"</h3>")).show();
+  		$("#hub_scelto").append($("<h2>HUB SELEZIONATO</h2><h3 id='nome_hub'>"+obj[x].nome_hub+"</h3><h4>"+obj[x].citta+", "+obj[x].indirizzo+"</h3>")).show();
   		$("#data").show();
   		$("#data_nascita").attr("min","2021-09-17");
   }
@@ -75,22 +75,50 @@
 	}
   	
 	function orari(){
+		if($("#data_scelta").val()!=""){
 		$.post("/labarbera_drago/scelta_ora", 
 				{
 					data_scelta: $("#data_scelta").val(),
 					nome_hub: $("#nome_hub").text()
 				},
 				function(data, status){
+					$("#orari_disponibili").children("button").each(function(){
+						$(this).removeAttr("disabled");
+						$(this).removeAttr("data-toggle");
+						$(this).removeAttr("title");
+					});
+					if(data=="1"){
+						alert("Inserire una data e/o un nome hub corretto!");
+						$("#orari_disponibili").hide();
+					}
+					else{
 					$("#orari_disponibili").show();
 					for(var i in data){
-						alert(data[i].ora);
-						$("#orari_disponibili").children("p").each(function(){
+						//alert(data[i].ora);
+						$("#orari_disponibili").children("button").each(function(){
 							if($(this).text()==data[i].ora){
-								$(this).hide();
+								$(this).attr("disabled","true");
+								$(this).attr("data-toggle","tooltip");
+								$(this).attr("title", "Orario non disponibile!");
 							}
 						});
 					}
-					});
+					}});
+	
+		}
+		else{
+			alert("Inserire una data corretta!");
+		}
+	}
+	
+	function effettuaPrenotazione(x){ //fai tutto con la form e qui setti i campi del form cosi usi il dispatcher
+		$.post("/labarbera_drago/riepilogo", 
+				{
+					data_scelta: $("#data_scelta").val(),
+					nome_hub: $("#nome_hub").text(),
+					ora: x
+				},
+				function(data, status){});
 	}
   </script>
 <title>SCELTA LUOGO e DATA</title>
@@ -118,20 +146,21 @@
   	String mese;
   	if(data.getMonth()>=9){mese=""+(data.getMonth()+1)+"";}else{mese="0"+(data.getMonth()+1)+"";}
   	String data_min=""+(data.getYear()+1900)+"-"+mese+"-"+data.getDate()+"";
-  	out.println("<input type='Date' id='data_scelta' class='form-control' min="+data_min+" required>");
+  	out.println("<input type='Date' id='data_scelta' class='form-control' max="+data_min+" required>");
   	%>
   	<button class="btn btn-primary" onclick="sceltaHub()">Cambia Hub</button>
   	<button class="btn btn-primary"  onclick="orari()">Vedi orari disponibili</button>
   	</div>
   	<br><br>
   	<div id="orari_disponibili">
-  		<p>08:00-09:00</p><button>SCEGLI</button>
-  		<p>09:00-10:00</p><button>SCEGLI</button>
-  		<p>10:00-11:00</p><button>SCEGLI</button>
-  		<p>11:00-12:00</p><button>SCEGLI</button>
-  		<p>12:00-13:00</p><button>SCEGLI</button>
+  	<h3> Orari disponibili</h3>
+  		<button type="submit"  onClick="effettuaPrenotazione('08:00-09:00')" class="btn btn-primary">08:00-09:00</button><br><br>
+  		<button type="submit" onClick="effettuaPrenotazione('09:00-10:00')" class="btn btn-primary">09:00-10:00</button><br><br>
+  		<button type="submit" onClick="effettuaPrenotazione('10:00-11:00')" class="btn btn-primary">10:00-11:00</button><br><br>
+  		<button type="submit" onClick="effettuaPrenotazione('11:00-12:00')" class="btn btn-primary">11:00-12:00</button><br><br>
+  		<button type="submit" onClick="effettuaPrenotazione('12:00-13:00')" class="btn btn-primary">12:00-13:00</button><br><br>
   	</div>
   </div>
-    
+  
 </body>
 </html>
