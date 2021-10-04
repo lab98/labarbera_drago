@@ -36,6 +36,8 @@
   		$("#data").hide();
   		$("#hub_scelto").hide();
   		$("#orari_disponibili").hide();
+  		$("#invio").hide();
+  		
   		$.get("/labarbera_drago/scelta_luogo",function(data, status){
   			obj=data;
   			var cit=estrai(obj);
@@ -59,16 +61,17 @@
   	function selezionaData(x){
   		$("#scelta").hide();
   		$("#hub").hide();
-  		$("#hub_scelto").append($("<h2>HUB SELEZIONATO</h2><h3 id='nome_hub'>"+obj[x].nome_hub+"</h3><h4>"+obj[x].citta+", "+obj[x].indirizzo+"</h3>")).show();
+  		$("#hub_scelto h2").append($("<h3 id='nome_hub'>"+obj[x].nome_hub+"</h3><h4>"+obj[x].citta+", "+obj[x].indirizzo+"</h3>"));
+  		$("#hub_scelto").show();
   		$("#data").show();
-  		$("#data_nascita").attr("min","2021-09-17");
+  		
   }
 		
 	function sceltaHub(){
 		$("#scelta").show();
 		$("#hub").show();
-		$("#hub_scelto h2").remove();
 		$("#hub_scelto h3").remove();
+		$("#hub_scelto h4").remove();
 		$("#hub_scelto").hide();
 		$("#data").hide();
 		$("#orari_disponibili").hide();
@@ -111,14 +114,28 @@
 		}
 	}
 	
-	function effettuaPrenotazione(x){ //fai tutto con la form e qui setti i campi del form cosi usi il dispatcher
-		$.post("/labarbera_drago/riepilogo", 
-				{
-					data_scelta: $("#data_scelta").val(),
-					nome_hub: $("#nome_hub").text(),
-					ora: x
-				},
-				function(data, status){});
+	function effettuaPrenotazione(x){//fai tutto con la form e qui setti i campi del form cosi usi il dispatcher
+		$("#orari_disponibili").children("input").each(function(){
+			$(this).remove();
+		});
+		$("#invio").show();
+		$("#invio").append($("<input name='data_scelta' type='Date' value="+$('#data_scelta').val()+" required>").hide());
+		$("#invio").append($("<input name='nome_hub' type='text' value="+$('#nome_hub').val()+" required>").hide());
+		$("#invio").append($("<input name='ora' type='text' value="+x+" required>").hide());
+		/*$.ajax({
+			url: "/labarbera_drago/riepilogo",
+			type: "POST",
+			async: false,
+			data:{
+				data_scelta: $("#data_scelta").val(),
+				nome_hub: $("#nome_hub").text(),
+				ora: x
+			},
+			error: function(richiesta,stato,errori){
+				$("div#risposta").html("Chiamata fallita:"+stato+""+errori);
+				}
+		
+	});*/
 	}
   </script>
 <title>SCELTA LUOGO e DATA</title>
@@ -136,7 +153,7 @@
     <div id="hub" class="card-deck">
     </div>
     <div id="hub_scelto">
-    	
+    	<h2>HUB SELEZIONATO</h2>
     </div>
   	<br>
   	<br>
@@ -159,7 +176,12 @@
   		<button type="submit" onClick="effettuaPrenotazione('10:00-11:00')" class="btn btn-primary">10:00-11:00</button><br><br>
   		<button type="submit" onClick="effettuaPrenotazione('11:00-12:00')" class="btn btn-primary">11:00-12:00</button><br><br>
   		<button type="submit" onClick="effettuaPrenotazione('12:00-13:00')" class="btn btn-primary">12:00-13:00</button><br><br>
+  		
   	</div>
+  	<form id="invio" action="/labarbera_drago/riepilogo" method="post">
+  			<button type="submit" class="btn btn-primary">PRENOTA</button>
+  	</form>
+  	
   </div>
   
 </body>
