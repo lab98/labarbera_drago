@@ -14,6 +14,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script type="text/javascript">
   	var obj;
+  	var hub_scelto;
+  	
   	function estrai(x){
   		var f=0;
   		var citta=[x[0].citta];
@@ -59,6 +61,7 @@
 	};
   	
   	function selezionaData(x){
+  		hub_scelto=obj[x].cod_hub;
   		$("#scelta").hide();
   		$("#hub").hide();
   		$("#hub_scelto h2").append($("<h3 id='nome_hub'>"+obj[x].nome_hub+"</h3><h4>"+obj[x].citta+", "+obj[x].indirizzo+"</h3>"));
@@ -115,12 +118,12 @@
 	}
 	
 	function effettuaPrenotazione(x){//fai tutto con la form e qui setti i campi del form cosi usi il dispatcher
-		$("#orari_disponibili").children("input").each(function(){
+		$("#invio").children("input").each(function(){
 			$(this).remove();
 		});
 		$("#invio").show();
 		$("#invio").append($("<input name='data_scelta' type='Date' value="+$('#data_scelta').val()+" required>").hide());
-		$("#invio").append($("<input name='nome_hub' type='text' value="+$('#nome_hub').val()+" required>").hide());
+		$("#invio").append($("<input name='nome_hub' type='text' value="+hub_scelto+" required>").hide());
 		$("#invio").append($("<input name='ora' type='text' value="+x+" required>").hide());
 		/*$.ajax({
 			url: "/labarbera_drago/riepilogo",
@@ -171,16 +174,22 @@
   	<br><br>
   	<div id="orari_disponibili">
   	<h3> Orari disponibili</h3>
-  		<button type="submit"  onClick="effettuaPrenotazione('08:00-09:00')" class="btn btn-primary">08:00-09:00</button><br><br>
-  		<button type="submit" onClick="effettuaPrenotazione('09:00-10:00')" class="btn btn-primary">09:00-10:00</button><br><br>
-  		<button type="submit" onClick="effettuaPrenotazione('10:00-11:00')" class="btn btn-primary">10:00-11:00</button><br><br>
-  		<button type="submit" onClick="effettuaPrenotazione('11:00-12:00')" class="btn btn-primary">11:00-12:00</button><br><br>
-  		<button type="submit" onClick="effettuaPrenotazione('12:00-13:00')" class="btn btn-primary">12:00-13:00</button><br><br>
-  		
-  	</div>
-  	<form id="invio" action="/labarbera_drago/riepilogo" method="post">
+  	<div class="row">
+  		<div class="col">
+  		<button type="submit"  onClick="effettuaPrenotazione('08:00-09:00')" class="btn btn-outline-primary">08:00-09:00</button><br><br>
+  		<button type="submit" onClick="effettuaPrenotazione('09:00-10:00')" class="btn btn-outline-primary">09:00-10:00</button><br><br>
+  		<button type="submit" onClick="effettuaPrenotazione('10:00-11:00')" class="btn btn-outline-primary">10:00-11:00</button><br><br>
+  		<button type="submit" onClick="effettuaPrenotazione('11:00-12:00')" class="btn btn-outline-primary">11:00-12:00</button><br><br>
+  		<button type="submit" onClick="effettuaPrenotazione('12:00-13:00')" class="btn btn-outline-primary">12:00-13:00</button><br><br>
+  		</div>
+  		<div class="col">
+  		<form id="invio" action="/labarbera_drago/riepilogo" method="post">
   			<button type="submit" class="btn btn-primary">PRENOTA</button>
-  	</form>
+  		</form>
+  		</div>
+  	</div>
+  	
+  	</div>
   	
   </div>
   
