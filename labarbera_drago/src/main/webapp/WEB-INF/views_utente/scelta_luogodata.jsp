@@ -64,7 +64,7 @@
   		hub_scelto=obj[x].cod_hub;
   		$("#scelta").hide();
   		$("#hub").hide();
-  		$("#hub_scelto h2").append($("<h3 id='nome_hub'>"+obj[x].nome_hub+"</h3><h4>"+obj[x].citta+", "+obj[x].indirizzo+"</h3>"));
+  		$("#hub_scelto h2").append($("<h3 style='color:red;' id='nome_hub'>"+obj[x].nome_hub+"</h3><h4>"+obj[x].citta+", "+obj[x].indirizzo+"</h3>"));
   		$("#hub_scelto").show();
   		$("#data").show();
   		
@@ -82,12 +82,15 @@
   	
 	function orari(){
 		if($("#data_scelta").val()!=""){
+			$("#metti_data").html("<h5 style='color:red;'>"+$("#data_scelta").val()+"</h5>");
+			$("#metti_orario").html("<h5></h5>");
 		$.post("/labarbera_drago/scelta_ora", 
 				{
 					data_scelta: $("#data_scelta").val(),
 					nome_hub: $("#nome_hub").text()
 				},
 				function(data, status){
+					$("#invio").hide();
 					$("#orari_disponibili").children("button").each(function(){
 						$(this).removeAttr("disabled");
 						$(this).removeAttr("data-toggle");
@@ -98,6 +101,7 @@
 						$("#orari_disponibili").hide();
 					}
 					else{
+					
 					$("#orari_disponibili").show();
 					for(var i in data){
 						//alert(data[i].ora);
@@ -118,6 +122,7 @@
 	}
 	
 	function effettuaPrenotazione(x){//fai tutto con la form e qui setti i campi del form cosi usi il dispatcher
+		$("#metti_orario").html("<h5 style='color:red;'>"+x+"</h5>");
 		$("#invio").children("input").each(function(){
 			$(this).remove();
 		});
@@ -159,37 +164,47 @@
     	<h2>HUB SELEZIONATO</h2>
     </div>
   	<br>
-  	<br>
   	<div id="data">
-  	<p> Seleziona la Data: </p>
+  	<button class="btn btn-primary" onclick="sceltaHub()">Cambia Hub</button>
+  	<br>
+  	<br>
+  	<h2> DATA SELEZIONATA </h2>
+  	<p id="metti_data"></p>
   	<% Date data= new Date();
   	String mese;
   	if(data.getMonth()>=9){mese=""+(data.getMonth()+1)+"";}else{mese="0"+(data.getMonth()+1)+"";}
   	String data_min=""+(data.getYear()+1900)+"-"+mese+"-"+data.getDate()+"";
-  	out.println("<input type='Date' id='data_scelta' class='form-control' max="+data_min+" required>");
+  	out.println("<input type='Date' id='data_scelta' class='form-control' min="+data_min+" required>");
   	%>
-  	<button class="btn btn-primary" onclick="sceltaHub()">Cambia Hub</button>
-  	<button class="btn btn-primary"  onclick="orari()">Vedi orari disponibili</button>
+  	<br>
+  	<button class="btn btn-primary"  onclick="orari()">Seleziona Data</button>
   	</div>
   	<br><br>
   	<div id="orari_disponibili">
-  	<h3> Orari disponibili</h3>
-  	<div class="row">
-  		<div class="col">
-  		<button type="submit"  onClick="effettuaPrenotazione('08:00-09:00')" class="btn btn-outline-primary">08:00-09:00</button><br><br>
-  		<button type="submit" onClick="effettuaPrenotazione('09:00-10:00')" class="btn btn-outline-primary">09:00-10:00</button><br><br>
-  		<button type="submit" onClick="effettuaPrenotazione('10:00-11:00')" class="btn btn-outline-primary">10:00-11:00</button><br><br>
-  		<button type="submit" onClick="effettuaPrenotazione('11:00-12:00')" class="btn btn-outline-primary">11:00-12:00</button><br><br>
-  		<button type="submit" onClick="effettuaPrenotazione('12:00-13:00')" class="btn btn-outline-primary">12:00-13:00</button><br><br>
+  	<h2> ORARIO SELEZIONATO</h2>
+  	<p id="metti_orario"></p>
+  		<button type="submit"  onClick="effettuaPrenotazione('08:00-09:00')" class="btn btn-outline-primary">08:00-09:00</button>
+  		<button type="submit" onClick="effettuaPrenotazione('09:00-10:00')" class="btn btn-outline-primary">09:00-10:00</button>
+  		<button type="submit" onClick="effettuaPrenotazione('10:00-11:00')" class="btn btn-outline-primary">10:00-11:00</button>
+  		<button type="submit" onClick="effettuaPrenotazione('11:00-12:00')" class="btn btn-outline-primary">11:00-12:00</button>
+  		<button type="submit" onClick="effettuaPrenotazione('12:00-13:00')" class="btn btn-outline-primary">12:00-13:00</button>
+  		<br><br>
+  		<div class="row">
+  			<div class="col">
+  			</div>
+  			<div class="col">
+  				<form id="invio" action="/labarbera_drago/riepilogo" method="post">
+  					<button type="submit" class="btn btn-primary">PRENOTA</button>
+  				</form>
+  			</div>
+  			<div class="col">
+  			</div>
   		</div>
-  		<div class="col">
-  		<form id="invio" action="/labarbera_drago/riepilogo" method="post">
-  			<button type="submit" class="btn btn-primary">PRENOTA</button>
-  		</form>
-  		</div>
+  		
+  		
   	</div>
   	
-  	</div>
+  	
   	
   </div>
   

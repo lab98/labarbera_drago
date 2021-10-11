@@ -79,23 +79,23 @@ public class Prenotazione_Servlet extends HttpServlet {
 						utente.setEmail(request.getParameter("email"));
 						utente.setTelefono(request.getParameter("telefono"));
 						utente.setCellulare(request.getParameter("cellulare"));
-						try {
-							query.prenotazione_dati_utente(utente); 
+						//try {
+							//query.prenotazione_dati_utente(utente);  spostare
 							RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_utente/scelta_luogodata.jsp");
 							dispatcher.forward(request, response);
-						} catch (SQLException e) {
+						/*} catch (SQLException e) {
 							// TODO Auto-generated catch block
 							request.setAttribute("errore", "Si è verificato un errore durante la registrazione dei dati, riprovare!");
 							e.printStackTrace();
 							RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_utente/prenotazione_errore.jsp");
-							dispatcher.forward(request, response);
+							dispatcher.forward(request, response); 
 						} catch (NamingException e) {
 							// TODO Auto-generated catch block
 							request.setAttribute("errore", "Si è verificato un errore durante la registrazione dei dati, riprovare!");
 							e.printStackTrace();
 							RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views_utente/prenotazione_errore.jsp");
 							dispatcher.forward(request, response);
-						}
+						}*/
 					}
 					else {
 						//Controllare se  il numero di tessera sanitaria è stato inserito correttamente! é gia presente un altro utente con questo numero
